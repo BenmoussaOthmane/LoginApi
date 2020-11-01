@@ -42,17 +42,13 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 Container(
                   width: double.infinity,
+                  height:500,
                   padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
                   margin: EdgeInsets.symmetric(vertical: 85, horizontal: 20),
                   decoration: BoxDecoration(
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-                    color: Theme.of(context).primaryColor,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Theme.of(context).hintColor.withOpacity(0.2),
-                          offset: Offset(0, 10),
-                          blurRadius: 20)
-                    ],
+
                   ),
                   child: Form(
                     key: globalFormKey,
@@ -64,13 +60,13 @@ class _LoginPageState extends State<LoginPage> {
                           style: Theme.of(context).textTheme.headline2,
                         ),
                         SizedBox(height: 20),
-                        new TextFormField(
+                         TextFormField(
                           keyboardType: TextInputType.emailAddress,
                           onSaved: (input) => loginRequestModel.email = input,
                           validator: (input) => !input.contains('@')
                               ? "Email Id should be valid"
                               : null,
-                          decoration: new InputDecoration(
+                          decoration:  InputDecoration(
                             hintText: "Email Address",
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -87,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         SizedBox(height: 20),
-                        new TextFormField(
+                         TextFormField(
                           style:
                               TextStyle(color: Theme.of(context).accentColor),
                           keyboardType: TextInputType.text,
@@ -97,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                               ? "Password should be more than 3 characters"
                               : null,
                           obscureText: hidePassword,
-                          decoration: new InputDecoration(
+                          decoration:  InputDecoration(
                             hintText: "Password",
                             enabledBorder: UnderlineInputBorder(
                                 borderSide: BorderSide(
@@ -138,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
                                 isApiCallProcess = true;
                               });
 
-                              APIService apiService = new APIService();
+                              APIService apiService =  APIService();
                               apiService.login(loginRequestModel).then((value) {
                                 if (value != null) {
                                   setState(() {
@@ -146,6 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                                   });
 
                                   if (value.token.isNotEmpty) {
+                                    print(value.token);
                                     final snackBar = SnackBar(
                                         content: Text("Login Successful"));
                                     scaffoldKey.currentState
